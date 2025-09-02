@@ -99,7 +99,7 @@ Example editing prompts:
 - **Framework**: [Next.js 14](https://nextjs.org/)
 - **Language**: TypeScript/JavaScript
 - **Styling**: Tailwind CSS / CSS Modules
-- **AI Model**: Google Gemini 2.0 Flash
+- **AI Model**: Google Gemini 2.5 Flash, Flash-Lite, Image Flash Preview (nano banana)
 - **API**: Gemini API via `@google/generative-ai`
 - **Deployment**: Vercel / Self-hosted
 
