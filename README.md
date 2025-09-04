@@ -1,15 +1,23 @@
 # Gemini Image Editor
 
-A modern Next.js application that leverages Google's Gemini AI models to analyze and edit images with powerful AI capabilities.
+A conversational AI-powered image generation and editing application built with Next.js and Google's Gemini models, featuring native image generation capabilities through Gemini 2.5 Flash Image Preview.
 
 ## ✨ Features
 
-- **AI-Powered Image Generation**: Create images from text descriptions using Gemini's native image generation
-- **Smart Image Editing**: Transform and edit existing images using natural language prompts
-- **Real-time Processing**: Fast, responsive image generation and editing
-- **Multiple Input Support**: Combine text and images for complex editing tasks
-- **Iterative Refinement**: Continue editing images through conversation
-- **Modern UI**: Clean, responsive interface built with Next.js and React
+### Core Capabilities
+- **🎨 AI Image Generation**: Create images from text descriptions using Gemini 2.5 Flash Image Preview
+- **✏️ Smart Image Editing**: Transform existing images through natural language commands
+- **💬 Conversational Interface**: Chat-based interaction for intuitive image manipulation
+- **🔄 Iterative Refinement**: Continue editing through multi-turn conversations
+- **📸 Multi-Image Support**: Upload and work with up to 8 images simultaneously
+
+### Advanced Features
+- **🚀 Quick Actions**: Pre-configured image editing commands for common tasks
+- **📚 Prompt Library**: Save and organize frequently used prompts
+- **🎯 Smart Suggestions**: AI-generated edit commands based on image analysis
+- **⚙️ Multi-Model Support**: Switch between different Gemini models (Flash, Pro, Flash-Lite, Image Preview)
+- **💾 Local Storage**: All settings and prompts saved in browser storage
+- **🎭 Custom System Prompts**: Configure image analysis behavior
 
 ## 🚀 Getting Started
 
@@ -34,144 +42,116 @@ A modern Next.js application that leverages Google's Gemini AI models to analyze
    yarn install
    ```
 
-3. **Set up environment variables**
-   
-   Create a `.env.local` file in the project root:
-   ```env
-   GEMINI_API_KEY=your_gemini_api_key_here
-   ```
-
-4. **Run the development server**
+3. **Run the development server**
    ```bash
    npm run dev
    # or
    yarn dev
    ```
 
-5. **Open your browser**
-   
+4. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-### Production Build
+5. **Configure API Key**
+   - Click the Settings button in the app
+   - Enter your Gemini API key
+   - The key is saved securely in your browser's local storage
 
-```bash
-# Build the application
-npm run build
+## 📖 Usage Guide
 
-# Start the production server
-npm start
+### Chat Interface
+The app uses a conversational chat interface where you interact with Gemini through messages:
+
+1. **Text Generation**: Type a description of the image you want to create
+2. **Image Upload**: Click the image icon to upload photos for editing
+3. **Quick Actions**: Select from pre-built editing commands when an image is uploaded
+4. **Prompt Library**: Type `/` to access saved prompts
+
+### Image Generation Examples
+```
+"A serene Japanese garden with cherry blossoms and a red bridge"
+"Cyberpunk cityscape at night with neon lights"
+"Professional headshot with studio lighting"
 ```
 
-## 📖 Usage
+### Image Editing Examples
+Upload an image and try these commands:
+```
+"Remove the background and make it transparent"
+"Change the time of day to sunset"
+"Make it look like a watercolor painting"
+"Add dramatic lighting from the left"
+```
 
-### Image Generation
+### Quick Actions
+The app includes pre-configured quick actions for common edits:
+- Background removal/replacement
+- Style transfers (sketch, painting, etc.)
+- Color adjustments
+- Object removal
+- Professional enhancements
 
-1. Enter a text prompt describing the image you want to create
-2. Click "Generate" to create an AI-generated image
-3. Download or continue editing the result
-
-Example prompts:
-- "A futuristic city with floating gardens and glass buildings"
-- "A cozy coffee shop interior with warm lighting"
-- "Abstract art with vibrant colors and geometric shapes"
-
-### Image Editing
-
-1. Upload an existing image
-2. Describe the changes you want to make
-3. Submit to see the AI-edited result
-4. Continue refining with additional prompts
-
-Example editing prompts:
-- "Change the background to a sunset"
-- "Make it look like a watercolor painting"
-- "Add snow to the scene"
-- "Remove the object on the left"
-
-### Advanced Features
-
-- **Multi-turn Editing**: Keep refining your image through multiple prompts
-- **Style Transfer**: Apply the style of one image to another
-- **Image Composition**: Combine multiple images into a single scene
+### Smart Command Suggestions
+When you upload an image, the AI automatically analyzes it and suggests 5 relevant editing commands that you can click to execute immediately.
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 14](https://nextjs.org/)
-- **Language**: TypeScript/JavaScript
-- **Styling**: Tailwind CSS / CSS Modules
-- **AI Model**: Google Gemini 2.5 Flash, Flash-Lite, Image Flash Preview (nano banana)
-- **API**: Gemini API via `@google/generative-ai`
-- **Deployment**: Vercel / Self-hosted
+- **Framework**: [Next.js 13.5](https://nextjs.org/) (App Router)
+- **UI Components**: [Radix UI](https://www.radix-ui.com/) + [shadcn/ui](https://ui.shadcn.com/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **AI Models**: Google Gemini API
+  - Gemini 2.5 Flash
+  - Gemini 2.5 Pro  
+  - Gemini 2.5 Flash-Lite
+  - Gemini 2.5 Flash Image Preview
+- **State Management**: React Hooks + Local Storage
+- **Forms**: React Hook Form with Zod validation
 
 ## 📁 Project Structure
 
 ```
 gemini-image-editor/
-├── app/                  # Next.js app directory
-│   ├── api/             # API routes
-│   ├── components/      # React components
-│   ├── layout.tsx       # Root layout
-│   └── page.tsx         # Home page
-├── public/              # Static assets
-├── lib/                 # Utility functions
-│   └── gemini.ts       # Gemini API integration
-├── types/              # TypeScript type definitions
-├── .env.local          # Environment variables
-├── next.config.js      # Next.js configuration
-├── package.json        # Dependencies
-└── README.md          # Documentation
+├── app/                      # Next.js app directory
+│   ├── api/                 # API routes
+│   │   └── gemini/          # Gemini API endpoint
+│   ├── components/          # Page components
+│   │   └── chat/           # Chat UI components
+│   ├── hooks/              # Custom React hooks
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx            # Main chat interface
+├── components/              # Shared UI components
+│   ├── ui/                 # shadcn/ui components
+│   └── dialogs/            # Modal dialogs
+├── lib/                     # Utility functions
+│   ├── constants.ts        # App constants
+│   ├── geminiService.ts    # Gemini API service
+│   └── utils.ts            # Helper functions
+├── types/                   # TypeScript definitions
+├── public/                  # Static assets
+└── package.json            # Dependencies
 ```
 
 ## 🔧 Configuration
 
-### Environment Variables
+### Available Models
+- **Gemini 2.5 Flash**: Fast, general-purpose model
+- **Gemini 2.5 Pro**: Advanced reasoning and capabilities
+- **Gemini 2.5 Flash-Lite**: Lightweight, faster responses
+- **Gemini 2.5 Flash Image Preview**: Specialized for image generation/editing
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `GEMINI_API_KEY` | Your Google Gemini API key | Yes |
-| `NEXT_PUBLIC_APP_URL` | Application URL | No |
+### Adjustable Parameters
+- **Temperature**: Controls creativity (0.0 - 1.0)
+- **Top-K**: Limits vocabulary selection
+- **Top-P**: Nucleus sampling threshold
+- **Max Output Tokens**: Response length limit
+- **Safety Settings**: Content filtering levels
 
-### Gemini API Configuration
-
-```javascript
-// lib/gemini.ts
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-
-const model = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash-exp",
-  generationConfig: {
-    responseModalities: ["TEXT", "IMAGE"]
-  }
-});
-```
-
-## 🎨 Customization
-
-### Styling
-
-The application uses Tailwind CSS for styling. Customize the theme in `tailwind.config.js`:
-
-```javascript
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        // Your custom colors
-      }
-    }
-  }
-}
-```
-
-### Components
-
-Key components you can customize:
-- `ImageUploader`: Handle image uploads
-- `PromptInput`: Text input for prompts
-- `ImageDisplay`: Display generated/edited images
-- `GenerationControls`: Controls for image generation
+### Data Storage
+All data is stored locally in your browser:
+- API keys (encrypted in localStorage)
+- Chat history (session-based)
+- Saved prompts and quick actions
+- User preferences and settings
 
 ## 🚢 Deployment
 
@@ -179,17 +159,16 @@ Key components you can customize:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Technotraxx/gemini-image-editor)
 
-1. Click the deploy button above
-2. Add your `GEMINI_API_KEY` in the environment variables
-3. Deploy!
-
 ### Self-Hosting
 
 ```bash
-# Build the application
+# Build for production
 npm run build
 
-# Start with PM2
+# Start production server
+npm start
+
+# Or use PM2
 pm2 start npm --name "gemini-editor" -- start
 ```
 
@@ -206,49 +185,48 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-## 🤝 Contributing
+## 🔐 Security Notes
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📊 API Usage
-
-- The Gemini API has rate limits and quotas
-- Each image generation/edit consumes tokens
-- Monitor your usage at [Google Cloud Console](https://console.cloud.google.com/)
-- Consider implementing caching for frequently requested operations
-
-## 🔐 Security
-
-- Never expose your API key in client-side code
-- Use Next.js API routes to proxy requests to Gemini
-- Implement rate limiting for production use
-- Validate and sanitize all user inputs
+- API keys are stored in browser localStorage (never sent to the server except for API calls)
+- All Gemini API calls are proxied through Next.js API routes
+- No data is stored on servers - everything is client-side
+- Images are processed as base64 strings in memory
+- Implements Gemini's safety settings for content filtering
 
 ## 🐛 Troubleshooting
 
+### Common Issues
+
+**"API Key Required" Error**
+- Open Settings and add your Gemini API key
+- Get a key from [Google AI Studio](https://aistudio.google.com/apikey)
+
+**Image Generation Not Working**
+- Ensure you're using the "Gemini 2.5 Flash Image Preview" model
+- Check API quotas in Google Cloud Console
+- Verify prompt doesn't violate content policies
+
 **Build Errors**
 ```bash
-# Clear cache and reinstall
 rm -rf node_modules .next
 npm install
 npm run dev
 ```
 
-**API Key Issues**
-- Ensure the key is in `.env.local` (not `.env`)
-- Restart the dev server after adding the key
-- Check key validity at Google AI Studio
+**Large Image Issues**
+- Images are automatically compressed
+- Maximum 8 images per message
+- Recommended image size: < 4MB
 
-**Image Generation Fails**
-- Check API quotas
-- Verify prompt doesn't violate content policies
-- Try simpler prompts first
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## 📚 Resources
 
@@ -256,6 +234,7 @@ npm run dev
 - [Gemini API Documentation](https://ai.google.dev/docs)
 - [Google AI Studio](https://aistudio.google.com/)
 - [Gemini Image Generation Guide](https://ai.google.dev/gemini-api/docs/image-generation)
+- [shadcn/ui Components](https://ui.shadcn.com/)
 
 ## 📄 License
 
@@ -265,10 +244,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Google DeepMind for the Gemini models
 - Vercel for Next.js framework
+- Radix UI for accessible components
+- shadcn for the beautiful UI library
 - The open-source community
 
 ---
 
-**Demo App**: This is a demonstration application showcasing Gemini's image generation and editing capabilities. For production use, implement proper authentication, rate limiting, and error handling.
+**Note**: This is a demonstration application showcasing Gemini's image generation and editing capabilities. For production use, implement proper authentication, rate limiting, and error handling.
 
 ⭐ Star this repo if you find it helpful!
